@@ -90,7 +90,8 @@ objc_object::getIsa()
     }
 }
 
-
+//CH_NOTO
+// 地址的最后1位（bit）是1，即是TaggedPointer
 inline bool 
 objc_object::isTaggedPointer() 
 {
@@ -103,6 +104,8 @@ objc_object::isBasicTaggedPointer()
     return isTaggedPointer()  &&  !isExtTaggedPointer();
 }
 
+//CH_NOTE
+// 地址的最后4位(bit) 都是1 则是ExtTaggedPointer
 inline bool 
 objc_object::isExtTaggedPointer() 
 {
@@ -115,6 +118,7 @@ objc_object::isExtTaggedPointer()
 // not SUPPORT_TAGGED_POINTERS
 
 
+// CH_NOTE 返回了 类的地址 
 inline Class 
 objc_object::getIsa() 
 {
@@ -146,12 +150,15 @@ objc_object::isExtTaggedPointer()
 
 
 #if SUPPORT_NONPOINTER_ISA
-
+//CH_NOTE
+// ios中，ISA()返回的是 类的地址
+// ISA_MASK 获取 shiftcls的值，即类的地址右移3位后的值,其他位均为0
+// &ISA_MASK（shiftcls左移3位补了0）
 inline Class 
 objc_object::ISA() 
 {
     assert(!isTaggedPointer()); 
-#if SUPPORT_INDEXED_ISA
+#if SUPPORT_INDEXED_ISA  //CH_NOTE SUPPORT_INDEXED_ISA 在WatchOS中定义的？
     if (isa.nonpointer) {
         uintptr_t slot = isa.indexcls;
         return classForIndex((unsigned)slot);
@@ -214,7 +221,7 @@ objc_object::initIsa(Class cls, bool nonpointer, bool hasCxxDtor)
 
         isa_t newisa(0);
 
-#if SUPPORT_INDEXED_ISA
+#if SUPPORT_INDEXED_ISA //CH_NOTE WatchOS中值为1
         assert(cls->classArrayIndex() > 0);
         newisa.bits = ISA_INDEX_MAGIC_VALUE;
         // isa.magic is part of ISA_MAGIC_VALUE

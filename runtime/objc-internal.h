@@ -360,6 +360,8 @@ _objc_makeTaggedPointer(objc_tag_index_t tag, uintptr_t value)
     }
 }
 
+//CH_NOTE
+//地址的最后一位是1，则是TaggedPointer
 static inline bool 
 _objc_isTaggedPointer(const void * _Nullable ptr) 
 {

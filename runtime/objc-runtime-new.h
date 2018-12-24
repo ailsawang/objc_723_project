@@ -24,7 +24,7 @@
 #ifndef _OBJC_RUNTIME_NEW_H
 #define _OBJC_RUNTIME_NEW_H
 
-#if __LP64__
+#if __LP64__  //判断设备是否为64位
 typedef uint32_t mask_t;  // x86_64 & arm64 asm are less efficient with 16-bits
 #else
 typedef uint16_t mask_t;
@@ -80,6 +80,8 @@ public:
 // classref_t is unremapped class_t*
 typedef struct classref * classref_t;
 
+//CH_NOTE
+// entsize_list_tt 实现了 non-fragile 特性的数组结构
 /***********************************************************************
 * entsize_list_tt<Element, List, FlagMask>
 * Generic implementation of an array of non-fragile structs.
@@ -203,7 +205,8 @@ struct entsize_list_tt {
     };
 };
 
-
+//CH_NOTE
+// 方法的结构体
 struct method_t {
     SEL name;
     const char *types;
@@ -219,6 +222,8 @@ struct method_t {
     };
 };
 
+//CH_NOTE
+// 变量的结构体
 struct ivar_t {
 #if __x86_64__
     // *offset was originally 64-bit on some x86_64 platforms.
@@ -235,12 +240,16 @@ struct ivar_t {
     uint32_t alignment_raw;
     uint32_t size;
 
+    //CH_NOTE
+    // ~(uint32_t)0 c语言中，~为取反运算符 所以 ~0即为-1
     uint32_t alignment() const {
         if (alignment_raw == ~(uint32_t)0) return 1U << WORD_SHIFT;
         return 1 << alignment_raw;
     }
 };
 
+//CH_NOTE
+// 属性的结构体
 struct property_t {
     const char *name;
     const char *attributes;
@@ -278,6 +287,8 @@ typedef uintptr_t protocol_ref_t;  // protocol_t *, but unremapped
 
 #define PROTOCOL_FIXED_UP_MASK (PROTOCOL_FIXED_UP_1 | PROTOCOL_FIXED_UP_2)
 
+//CH_NOTE
+// 协议的结构体？
 struct protocol_t : objc_object {
     const char *mangledName;
     struct protocol_list_t *protocols;
@@ -1060,7 +1071,10 @@ public:
     }
 };
 
-
+//CH_NOTE
+// objc_class结构体
+// 包含 superclass caches bits
+// 调用一个类的方法时，先找cache_t，再找方法列表
 struct objc_class : objc_object {
     // Class ISA;
     Class superclass;
@@ -1276,6 +1290,7 @@ struct objc_class : objc_object {
         return word_align(unalignedInstanceSize());
     }
 
+    //CH_NOTE  CoreFundation中，对象的size不小于16位，且尺寸是word_align的
     size_t instanceSize(size_t extraBytes) {
         size_t size = alignedInstanceSize() + extraBytes;
         // CF requires all objects be at least 16 bytes.

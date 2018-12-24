@@ -22,6 +22,22 @@
 
 /* Begin PBXBuildFile section */
 		0AD7A48121C69FBA0025359C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7A48021C69FBA0025359C /* main.m */; };
+		0AD7A49E21C7E0210025359C /* CrashReporterClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48821C7E0200025359C /* CrashReporterClient.h */; };
+		0AD7A49F21C7E0210025359C /* Block_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48921C7E0200025359C /* Block_private.h */; };
+		0AD7A4A021C7E0210025359C /* _simple.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48A21C7E0200025359C /* _simple.h */; };
+		0AD7A4A121C7E0210025359C /* spinlock_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48C21C7E0200025359C /* spinlock_private.h */; };
+		0AD7A4A221C7E0210025359C /* tsd_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48D21C7E0200025359C /* tsd_private.h */; };
+		0AD7A4A321C7E0210025359C /* qos_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48E21C7E0200025359C /* qos_private.h */; };
+		0AD7A4A421C7E0210025359C /* workqueue_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A48F21C7E0200025359C /* workqueue_private.h */; };
+		0AD7A4A521C7E0210025359C /* pthread_machdep.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49121C7E0200025359C /* pthread_machdep.h */; };
+		0AD7A4A621C7E0210025359C /* cpu_capabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49321C7E0200025359C /* cpu_capabilities.h */; };
+		0AD7A4A721C7E0210025359C /* reason.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49521C7E0200025359C /* reason.h */; };
+		0AD7A4A821C7E0210025359C /* qos_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49621C7E0200025359C /* qos_private.h */; };
+		0AD7A4A921C7E0210025359C /* lock_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49821C7E0200025359C /* lock_private.h */; };
+		0AD7A4AA21C7E0210025359C /* tsd.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49921C7E0200025359C /* tsd.h */; };
+		0AD7A4AB21C7E0210025359C /* base_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49A21C7E0200025359C /* base_private.h */; };
+		0AD7A4AC21C7E0210025359C /* objc-shared-cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49B21C7E0200025359C /* objc-shared-cache.h */; };
+		0AD7A4AD21C7E0210025359C /* dyld_priv.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AD7A49D21C7E0200025359C /* dyld_priv.h */; };
 		393CEAC00DC69E3E000B69DE /* objc-references.mm in Sources */ = {isa = PBXBuildFile; fileRef = 393CEABF0DC69E3E000B69DE /* objc-references.mm */; };
 		393CEAC60DC69E67000B69DE /* objc-references.h in Headers */ = {isa = PBXBuildFile; fileRef = 393CEAC50DC69E67000B69DE /* objc-references.h */; };
 		39ABD72312F0B61800D1054C /* objc-weak.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ABD71F12F0B61800D1054C /* objc-weak.h */; };
@@ -140,6 +156,22 @@
 /* Begin PBXFileReference section */
 		0AD7A47E21C69FBA0025359C /* objc-debug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "objc-debug"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD7A48021C69FBA0025359C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0AD7A48821C7E0200025359C /* CrashReporterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporterClient.h; sourceTree = "<group>"; };
+		0AD7A48921C7E0200025359C /* Block_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_private.h; sourceTree = "<group>"; };
+		0AD7A48A21C7E0200025359C /* _simple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _simple.h; sourceTree = "<group>"; };
+		0AD7A48C21C7E0200025359C /* spinlock_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spinlock_private.h; sourceTree = "<group>"; };
+		0AD7A48D21C7E0200025359C /* tsd_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsd_private.h; sourceTree = "<group>"; };
+		0AD7A48E21C7E0200025359C /* qos_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qos_private.h; sourceTree = "<group>"; };
+		0AD7A48F21C7E0200025359C /* workqueue_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workqueue_private.h; sourceTree = "<group>"; };
+		0AD7A49121C7E0200025359C /* pthread_machdep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pthread_machdep.h; sourceTree = "<group>"; };
+		0AD7A49321C7E0200025359C /* cpu_capabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpu_capabilities.h; sourceTree = "<group>"; };
+		0AD7A49521C7E0200025359C /* reason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reason.h; sourceTree = "<group>"; };
+		0AD7A49621C7E0200025359C /* qos_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qos_private.h; sourceTree = "<group>"; };
+		0AD7A49821C7E0200025359C /* lock_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lock_private.h; sourceTree = "<group>"; };
+		0AD7A49921C7E0200025359C /* tsd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsd.h; sourceTree = "<group>"; };
+		0AD7A49A21C7E0200025359C /* base_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_private.h; sourceTree = "<group>"; };
+		0AD7A49B21C7E0200025359C /* objc-shared-cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "objc-shared-cache.h"; sourceTree = "<group>"; };
+		0AD7A49D21C7E0200025359C /* dyld_priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dyld_priv.h; sourceTree = "<group>"; };
 		393CEABF0DC69E3E000B69DE /* objc-references.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-references.mm"; path = "runtime/objc-references.mm"; sourceTree = "<group>"; };
 		393CEAC50DC69E67000B69DE /* objc-references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-references.h"; path = "runtime/objc-references.h"; sourceTree = "<group>"; };
 		39ABD71F12F0B61800D1054C /* objc-weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-weak.h"; path = "runtime/objc-weak.h"; sourceTree = "<group>"; };
@@ -150,7 +182,7 @@
 		830F2A930D73876100392440 /* objc-accessors.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-accessors.mm"; path = "runtime/objc-accessors.mm"; sourceTree = "<group>"; };
 		830F2A970D738DC200392440 /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hashtable.h; path = runtime/hashtable.h; sourceTree = "<group>"; };
 		830F2AA50D7394C200392440 /* markgc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = markgc.cpp; sourceTree = "<group>"; };
-		83112ED30F00599600A5FBAF /* objc-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-internal.h"; path = "runtime/objc-internal.h"; sourceTree = "<group>"; };
+		83112ED30F00599600A5FBAF /* objc-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = "objc-internal.h"; path = "runtime/objc-internal.h"; sourceTree = "<group>"; };
 		831C85D30E10CF850066E64C /* objc-os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-os.h"; path = "runtime/objc-os.h"; sourceTree = "<group>"; };
 		831C85D40E10CF850066E64C /* objc-os.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-os.mm"; path = "runtime/objc-os.mm"; sourceTree = "<group>"; };
 		834266D70E665A8B002E4DA2 /* objc-gdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-gdb.h"; path = "runtime/objc-gdb.h"; sourceTree = "<group>"; };
@@ -255,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				BC8B5D1212D3D48100C78A5B /* libauto.dylib */,
+				0AD7A48721C7E0200025359C /* include */,
 				838485C60D6D687700CEA253 /* Public Headers */,
 				838485C70D6D688200CEA253 /* Private Headers */,
 				8384862A0D6D6ABC00CEA253 /* Project Headers */,
@@ -328,6 +361,77 @@
 				0AD7A48021C69FBA0025359C /* main.m */,
 			);
 			path = "objc-debug";
+			sourceTree = "<group>";
+		};
+		0AD7A48721C7E0200025359C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A48821C7E0200025359C /* CrashReporterClient.h */,
+				0AD7A48921C7E0200025359C /* Block_private.h */,
+				0AD7A48A21C7E0200025359C /* _simple.h */,
+				0AD7A48B21C7E0200025359C /* pthread */,
+				0AD7A49021C7E0200025359C /* System */,
+				0AD7A49421C7E0200025359C /* sys */,
+				0AD7A49721C7E0200025359C /* os */,
+				0AD7A49B21C7E0200025359C /* objc-shared-cache.h */,
+				0AD7A49C21C7E0200025359C /* mach-o */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		0AD7A48B21C7E0200025359C /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A48C21C7E0200025359C /* spinlock_private.h */,
+				0AD7A48D21C7E0200025359C /* tsd_private.h */,
+				0AD7A48E21C7E0200025359C /* qos_private.h */,
+				0AD7A48F21C7E0200025359C /* workqueue_private.h */,
+			);
+			path = pthread;
+			sourceTree = "<group>";
+		};
+		0AD7A49021C7E0200025359C /* System */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A49121C7E0200025359C /* pthread_machdep.h */,
+				0AD7A49221C7E0200025359C /* machine */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		0AD7A49221C7E0200025359C /* machine */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A49321C7E0200025359C /* cpu_capabilities.h */,
+			);
+			path = machine;
+			sourceTree = "<group>";
+		};
+		0AD7A49421C7E0200025359C /* sys */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A49521C7E0200025359C /* reason.h */,
+				0AD7A49621C7E0200025359C /* qos_private.h */,
+			);
+			path = sys;
+			sourceTree = "<group>";
+		};
+		0AD7A49721C7E0200025359C /* os */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A49821C7E0200025359C /* lock_private.h */,
+				0AD7A49921C7E0200025359C /* tsd.h */,
+				0AD7A49A21C7E0200025359C /* base_private.h */,
+			);
+			path = os;
+			sourceTree = "<group>";
+		};
+		0AD7A49C21C7E0200025359C /* mach-o */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7A49D21C7E0200025359C /* dyld_priv.h */,
+			);
+			path = "mach-o";
 			sourceTree = "<group>";
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
@@ -430,10 +534,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD7A4A221C7E0210025359C /* tsd_private.h in Headers */,
+				0AD7A4A721C7E0210025359C /* reason.h in Headers */,
 				83A4AEDE1EA08C7200ACADDE /* ObjectiveC.apinotes in Headers */,
 				83A4AEDC1EA0840800ACADDE /* module.modulemap in Headers */,
+				0AD7A4AC21C7E0210025359C /* objc-shared-cache.h in Headers */,
+				0AD7A4A821C7E0210025359C /* qos_private.h in Headers */,
+				0AD7A4A421C7E0210025359C /* workqueue_private.h in Headers */,
+				0AD7A4AD21C7E0210025359C /* dyld_priv.h in Headers */,
+				0AD7A4AA21C7E0210025359C /* tsd.h in Headers */,
 				830F2A980D738DC200392440 /* hashtable.h in Headers */,
 				838485BF0D6D687300CEA253 /* hashtable2.h in Headers */,
+				0AD7A4A321C7E0210025359C /* qos_private.h in Headers */,
+				0AD7A4A521C7E0210025359C /* pthread_machdep.h in Headers */,
+				0AD7A4A921C7E0210025359C /* lock_private.h in Headers */,
 				838486260D6D68F000CEA253 /* List.h in Headers */,
 				838485C30D6D687300CEA253 /* maptable.h in Headers */,
 				838486280D6D6A2400CEA253 /* message.h in Headers */,
@@ -443,6 +557,7 @@
 				838485F40D6D68A200CEA253 /* objc-class.h in Headers */,
 				838485F60D6D68A200CEA253 /* objc-config.h in Headers */,
 				838485F80D6D68A200CEA253 /* objc-exception.h in Headers */,
+				0AD7A4A621C7E0210025359C /* cpu_capabilities.h in Headers */,
 				83BE02E80FCCB24D00661494 /* objc-file-old.h in Headers */,
 				83BE02E90FCCB24D00661494 /* objc-file.h in Headers */,
 				834266D80E665A8B002E4DA2 /* objc-gdb.h in Headers */,
@@ -450,15 +565,20 @@
 				83112ED40F00599600A5FBAF /* objc-internal.h in Headers */,
 				838485FE0D6D68A200CEA253 /* objc-load.h in Headers */,
 				838486000D6D68A200CEA253 /* objc-loadmethod.h in Headers */,
+				0AD7A4A021C7E0210025359C /* _simple.h in Headers */,
 				831C85D50E10CF850066E64C /* objc-os.h in Headers */,
+				0AD7A4A121C7E0210025359C /* spinlock_private.h in Headers */,
 				838486030D6D68A200CEA253 /* objc-private.h in Headers */,
 				393CEAC60DC69E67000B69DE /* objc-references.h in Headers */,
+				0AD7A49F21C7E0210025359C /* Block_private.h in Headers */,
 				838486070D6D68A200CEA253 /* objc-runtime-new.h in Headers */,
 				83BE02EA0FCCB24D00661494 /* objc-runtime-old.h in Headers */,
 				8384860A0D6D68A200CEA253 /* objc-runtime.h in Headers */,
+				0AD7A49E21C7E0210025359C /* CrashReporterClient.h in Headers */,
 				8384860C0D6D68A200CEA253 /* objc-sel-set.h in Headers */,
 				838486100D6D68A200CEA253 /* objc-sync.h in Headers */,
 				838486130D6D68A200CEA253 /* objc.h in Headers */,
+				0AD7A4AB21C7E0210025359C /* base_private.h in Headers */,
 				838486140D6D68A200CEA253 /* Object.h in Headers */,
 				8384861E0D6D68A800CEA253 /* Protocol.h in Headers */,
 				838486200D6D68A800CEA253 /* runtime.h in Headers */,

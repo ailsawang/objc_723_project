@@ -6149,7 +6149,7 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
                               size_t *outAllocatedSize = nil)
 {
     if (!cls) return nil;
-
+    printf("cls: %p\n", cls);
     assert(cls->isRealized());
 
     // Read class's info bits all at once for performance
@@ -6179,6 +6179,7 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
         obj->initIsa(cls);
     }
 
+    printf("obj: %p\n",obj);
     if (cxxConstruct && hasCxxCtor) {
         obj = _objc_constructOrFree(obj, cls);
     }
@@ -6384,6 +6385,10 @@ static void
 disableTaggedPointers() { }
 
 #else
+
+//CH_NOTE
+//objc_debug_taggedpointer_classes数组 及 objc_debug_taggedpointer_ext_classes
+// 是定义在 objc-msg-*.s 文件中的
 
 // The "slot" used in the class table and given to the debugger 
 // includes the is-tagged bit. This makes objc_msgSend faster.
