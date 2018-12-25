@@ -39,7 +39,8 @@ enum ReturnDisposition : bool {
 static ALWAYS_INLINE 
 bool prepareOptimizedReturn(ReturnDisposition disposition);
 
-
+//CH_NOTE
+//支持 标记指针
 #if SUPPORT_TAGGED_POINTERS
 
 extern "C" { 
@@ -80,11 +81,11 @@ objc_object::getIsa()
 
     uintptr_t ptr = (uintptr_t)this;
     if (isExtTaggedPointer()) {
-        uintptr_t slot = 
+        uintptr_t slot =   //右移4位后，取最后8位的值
             (ptr >> _OBJC_TAG_EXT_SLOT_SHIFT) & _OBJC_TAG_EXT_SLOT_MASK;
         return objc_tag_ext_classes[slot];
     } else {
-        uintptr_t slot = 
+        uintptr_t slot =  //右移0位后，取最后4位的值
             (ptr >> _OBJC_TAG_SLOT_SHIFT) & _OBJC_TAG_SLOT_MASK;
         return objc_tag_classes[slot];
     }
@@ -98,6 +99,8 @@ objc_object::isTaggedPointer()
     return _objc_isTaggedPointer(this);
 }
 
+//CH_NOTE
+// 是标记指针 但不是ExtTaggedPointer
 inline bool 
 objc_object::isBasicTaggedPointer() 
 {
@@ -118,7 +121,7 @@ objc_object::isExtTaggedPointer()
 // not SUPPORT_TAGGED_POINTERS
 
 
-// CH_NOTE 返回了 类的地址 
+// CH_NOTE 返回了 类的地址
 inline Class 
 objc_object::getIsa() 
 {
@@ -154,11 +157,12 @@ objc_object::isExtTaggedPointer()
 // ios中，ISA()返回的是 类的地址
 // ISA_MASK 获取 shiftcls的值，即类的地址右移3位后的值,其他位均为0
 // &ISA_MASK（shiftcls左移3位补了0）
+// __x86_64__为44位  __arm64__中位33位
 inline Class 
 objc_object::ISA() 
 {
     assert(!isTaggedPointer()); 
-#if SUPPORT_INDEXED_ISA  //CH_NOTE SUPPORT_INDEXED_ISA 在WatchOS中定义的？
+#if SUPPORT_INDEXED_ISA  //CH_NOTE SUPPORT_INDEXED_ISA 在WatchOS中定义的
     if (isa.nonpointer) {
         uintptr_t slot = isa.indexcls;
         return classForIndex((unsigned)slot);
@@ -169,7 +173,8 @@ objc_object::ISA()
 #endif
 }
 
-
+//CH_NOTE
+// isa的最后一位非0，则表示 isa不是类的指针，包含了别的信息
 inline bool 
 objc_object::hasNonpointerIsa()
 {
@@ -208,13 +213,16 @@ objc_object::initInstanceIsa(Class cls, bool hasCxxDtor)
     initIsa(cls, true, hasCxxDtor);
 }
 
+//CH_NOTE
+// nonpointer： isa是否是类的指针
+// hasCxxDtor 是否用c++或者ARC的析构函数
 inline void 
 objc_object::initIsa(Class cls, bool nonpointer, bool hasCxxDtor) 
 { 
     assert(!isTaggedPointer()); 
     
     if (!nonpointer) {
-        isa.cls = cls;
+        isa.cls = cls;  //是类的指针时，直接赋值给cls
     } else {
         assert(!DisableNonpointerIsa);
         assert(!cls->instancesRequireRawIsa());
@@ -234,6 +242,7 @@ objc_object::initIsa(Class cls, bool nonpointer, bool hasCxxDtor)
         // isa.nonpointer is part of ISA_MAGIC_VALUE
         newisa.has_cxx_dtor = hasCxxDtor;
         newisa.shiftcls = (uintptr_t)cls >> 3;
+        // 以上赋值后， 最后一位为1  shiftclas填充了类的地址右移3位后的值
 #endif
 
         // This write must be performed in a single store in some cases

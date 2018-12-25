@@ -40,6 +40,20 @@ int main(int argc, const char * argv[]) {
         NSUInteger length = string1.length;
         NSArray *result = [string1 componentsSeparatedByString:@"c"];
         NSLog(@"string: %@ length: %@ result:%@",string1, @(length), result);
+        NSNumber *number1 = [NSNumber numberWithInteger:1];
+        NSNumber *number2 = [NSNumber numberWithInteger:2];
+        NSNumber *number3 = [NSNumber numberWithInteger:3];
+        NSNumber *number4 = @(4);
+        NSNumber *num5 = [NSNumber numberWithInteger:0xffff];
+        NSNumber *num6 = @(0xffffffff89);
+        NSNumber *num7 = @(0xfffffff8);
+        NSLog(@"number1: %p",number1);
+        NSLog(@"number2: %p",number2);
+        NSLog(@"number3: %p",number3);
+        NSLog(@"number4: %p",number4);
+        NSLog(@"number5: %p",num5);
+        NSLog(@"number6: %p",num6);
+        NSLog(@"number7: %p",num7);
     }
     return 0;
 }

@@ -97,6 +97,8 @@
 #   define SUPPORT_PACKED_ISA 1
 #endif
 
+//CH_NOTE
+//SUPPORT_NONPOINTER_ISA 表示 isa字段不是一个指针
 // Define SUPPORT_NONPOINTER_ISA=1 on any platform that may store something
 // in the isa field that is not a raw pointer.
 #if !SUPPORT_INDEXED_ISA  &&  !SUPPORT_PACKED_ISA
