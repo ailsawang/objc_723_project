@@ -342,6 +342,7 @@ _objc_makeTaggedPointer(objc_tag_index_t tag, uintptr_t value)
     // PAYLOAD_LSHIFT and PAYLOAD_RSHIFT are the payload extraction shifts.
     // They are reversed here for payload insertion.
 
+    printf("_objc_makeTaggedPointer tag: %i value:%u \n",tag, value);
     // assert(_objc_taggedPointersEnabled());
     if (tag <= OBJC_TAG_Last60BitPayload) {
         // assert(((value << _OBJC_TAG_PAYLOAD_RSHIFT) >> _OBJC_TAG_PAYLOAD_LSHIFT) == value);
@@ -361,7 +362,7 @@ _objc_makeTaggedPointer(objc_tag_index_t tag, uintptr_t value)
 }
 
 //CH_NOTE
-//地址的最后一位是1，则是TaggedPointer
+//地址的标记指针有效位是1，则是TaggedPointer  LSB则低位为1，MSB则高位为1
 static inline bool 
 _objc_isTaggedPointer(const void * _Nullable ptr) 
 {

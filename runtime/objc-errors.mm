@@ -148,7 +148,10 @@ static bool also_do_stderr(void)
 static void _objc_syslog(const char *message)
 {
     _simple_asl_log(ASL_LEVEL_ERR, nil, message);
-
+    printf("_objc_syslog begin \n");
+    printf(message);
+    printf("_objc_syslog end \n");
+    
     if (also_do_stderr()) {
         write(STDERR_FILENO, message, strlen(message));
     }
@@ -237,6 +240,7 @@ void _objc_inform(const char *fmt, ...)
 
     asprintf(&buf2, "objc[%d]: %s\n", getpid(), buf1);
     _objc_syslog(buf2);
+    printf("_objc_inform %s\n %s\n",buf1,buf2);
 
     free(buf2);
     free(buf1);

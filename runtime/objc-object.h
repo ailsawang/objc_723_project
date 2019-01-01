@@ -52,7 +52,7 @@ extern "C" {
 
 #endif
 
-#if SUPPORT_INDEXED_ISA
+#if SUPPORT_INDEXED_ISA  //watch os
 
 ALWAYS_INLINE Class &
 classForIndex(uintptr_t index) {
@@ -100,7 +100,7 @@ objc_object::isTaggedPointer()
 }
 
 //CH_NOTE
-// 是标记指针 但不是ExtTaggedPointer
+// 是标记指针 但不是Extended TaggedPointer
 inline bool 
 objc_object::isBasicTaggedPointer() 
 {
@@ -155,6 +155,7 @@ objc_object::isExtTaggedPointer()
 #if SUPPORT_NONPOINTER_ISA
 //CH_NOTE
 // ios中，ISA()返回的是 类的地址
+// ISA_MASK  33位或者44位 shiftcls所在位置的bit值为1，其他为0
 // ISA_MASK 获取 shiftcls的值，即类的地址右移3位后的值,其他位均为0
 // &ISA_MASK（shiftcls左移3位补了0）
 // __x86_64__为44位  __arm64__中位33位

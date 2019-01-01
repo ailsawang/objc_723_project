@@ -9,6 +9,9 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) NSObject *obj;
+@property (nonatomic, strong) NSString *string;
+
 @end
 
 @implementation ViewController
@@ -16,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.obj = [[NSObject alloc] init];
+    self.string = @"test";
+    
 }
 
 

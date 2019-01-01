@@ -44,6 +44,8 @@
 		0AD7A4D721D286240025359C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD7A4D621D286240025359C /* Assets.xcassets */; };
 		0AD7A4DA21D286240025359C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AD7A4D821D286240025359C /* LaunchScreen.storyboard */; };
 		0AD7A4DD21D286240025359C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7A4DC21D286240025359C /* main.m */; };
+		0AD7A50921DB5F6D0025359C /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7A50821DB5F6D0025359C /* MyObject.m */; };
+		0AD7A50C21DB61200025359C /* MySubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7A50B21DB61200025359C /* MySubObject.m */; };
 		393CEAC00DC69E3E000B69DE /* objc-references.mm in Sources */ = {isa = PBXBuildFile; fileRef = 393CEABF0DC69E3E000B69DE /* objc-references.mm */; };
 		393CEAC60DC69E67000B69DE /* objc-references.h in Headers */ = {isa = PBXBuildFile; fileRef = 393CEAC50DC69E67000B69DE /* objc-references.h */; };
 		39ABD72312F0B61800D1054C /* objc-weak.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ABD71F12F0B61800D1054C /* objc-weak.h */; };
@@ -188,6 +190,10 @@
 		0AD7A4D921D286240025359C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AD7A4DB21D286240025359C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD7A4DC21D286240025359C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0AD7A50721DB5F6D0025359C /* MyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyObject.h; sourceTree = "<group>"; };
+		0AD7A50821DB5F6D0025359C /* MyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyObject.m; sourceTree = "<group>"; };
+		0AD7A50A21DB61200025359C /* MySubObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySubObject.h; sourceTree = "<group>"; };
+		0AD7A50B21DB61200025359C /* MySubObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySubObject.m; sourceTree = "<group>"; };
 		393CEABF0DC69E3E000B69DE /* objc-references.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-references.mm"; path = "runtime/objc-references.mm"; sourceTree = "<group>"; };
 		393CEAC50DC69E67000B69DE /* objc-references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-references.h"; path = "runtime/objc-references.h"; sourceTree = "<group>"; };
 		39ABD71F12F0B61800D1054C /* objc-weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-weak.h"; path = "runtime/objc-weak.h"; sourceTree = "<group>"; };
@@ -383,6 +389,10 @@
 			isa = PBXGroup;
 			children = (
 				0AD7A48021C69FBA0025359C /* main.m */,
+				0AD7A50721DB5F6D0025359C /* MyObject.h */,
+				0AD7A50821DB5F6D0025359C /* MyObject.m */,
+				0AD7A50A21DB61200025359C /* MySubObject.h */,
+				0AD7A50B21DB61200025359C /* MySubObject.m */,
 			);
 			path = "objc-debug";
 			sourceTree = "<group>";
@@ -783,6 +793,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD7A50C21DB61200025359C /* MySubObject.m in Sources */,
+				0AD7A50921DB5F6D0025359C /* MyObject.m in Sources */,
 				0AD7A48121C69FBA0025359C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

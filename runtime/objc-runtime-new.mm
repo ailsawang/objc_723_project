@@ -1096,7 +1096,7 @@ static void addFutureNamedClass(const char *name, Class cls)
     if (PrintFuture) {
         _objc_inform("FUTURE: reserving %p for %s", (void*)cls, name);
     }
-
+    printf("addFutureNamedClass name: %s cls:%p %s",name,cls,cls->nameForLogging());
     class_rw_t *rw = (class_rw_t *)calloc(sizeof(class_rw_t), 1);
     class_ro_t *ro = (class_ro_t *)calloc(sizeof(class_ro_t), 1);
     ro->name = strdupIfMutable(name);
@@ -1747,7 +1747,7 @@ static Class realizeClass(Class cls)
     isMeta = ro->flags & RO_META;
 
     rw->version = isMeta ? 7 : 0;  // old runtime went up to 6
-
+//    printf("realizeClass cls: %p %s isMeta:%s \n",cls, cls->nameForLogging(),isMeta ? "YES" : "NO");
 
     // Choose an index for this class.
     // Sets cls->instancesRequireRawIsa if indexes no more indexes are available
@@ -1795,6 +1795,7 @@ static Class realizeClass(Class cls)
     }
     
     if (instancesRequireRawIsa) {
+        printf("realizeClass instancesRequireRawIsa : %s %p\n",ro->name,cls);
         cls->setInstancesRequireRawIsa(rawIsaIsInherited);
     }
 // SUPPORT_NONPOINTER_ISA
@@ -1802,15 +1803,22 @@ static Class realizeClass(Class cls)
 
     // Update superclass and metaclass in case of remapping
     cls->superclass = supercls;
+    if (isMeta) {
+        struct objc_class *tmpCls = (objc_class *)metacls;
+        struct objc_class *tmpMeta = (objc_class *)metacls;
+        if (strcmp(metacls->nameForLogging(), "NSObject") != 0) {
+            printf("stop");
+        }
+    }
     cls->initClassIsa(metacls);
-
+    printf("realize cls:%p %s meta:%p %s isMeta:%s \n",cls,cls->nameForLogging(),metacls,metacls->nameForLogging(), isMeta ? "YES" : "NO");
     // Reconcile instance variable offsets / layout.
     // This may reallocate class_ro_t, updating our ro variable.
     if (supercls  &&  !isMeta) reconcileInstanceVariables(cls, supercls, ro);
 
     // Set fastInstanceSize if it wasn't set already.
     cls->setInstanceSize(ro->instanceSize);
-
+   
     // Copy some flags from ro to rw
     if (ro->flags & RO_HAS_CXX_STRUCTORS) {
         cls->setHasCxxDtor();
@@ -2193,7 +2201,7 @@ Class readClass(Class cls, bool headerIsBundle, bool headerIsPreoptimized)
     } else {
         addNamedClass(cls, mangledName, replacing);
     }
-    
+    printf("readClass cls: %p name: %s \n",cls, mangledName);
     // for future reference: shared cache never contains MH_BUNDLEs
     if (headerIsBundle) {
         cls->data()->flags |= RO_FROM_BUNDLE;
@@ -2380,6 +2388,7 @@ void _read_images(header_info **hList, uint32_t hCount, int totalClasses, int un
         
         if (PrintConnecting) {
             _objc_inform("CLASS: found %d classes during launch", totalClasses);
+            printf("CLASS: found %d classes during launch", totalClasses);
         }
 
         // namedClasses
@@ -2391,6 +2400,7 @@ void _read_images(header_info **hList, uint32_t hCount, int totalClasses, int un
             NXCreateMapTable(NXStrValueMapPrototype, namedClassesSize);
 
         ts.log("IMAGE TIMES: first time tasks");
+        printf("IMAGE TIMES: first time tasks");
     }
 
 
@@ -2408,8 +2418,9 @@ void _read_images(header_info **hList, uint32_t hCount, int totalClasses, int un
         classref_t *classlist = _getObjc2ClassList(hi, &count);
         for (i = 0; i < count; i++) {
             Class cls = (Class)classlist[i];
+//            printf("readClass cls: %p %s \n",cls,cls->nameForLogging());
             Class newCls = readClass(cls, headerIsBundle, headerIsPreoptimized);
-
+//            struct objc_class *tmpClass = (objc_class *)newCls;
             if (newCls != cls  &&  newCls) {
                 // Class was moved but not deleted. Currently this occurs 
                 // only when the new class resolved a future class.
@@ -6149,7 +6160,7 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
                               size_t *outAllocatedSize = nil)
 {
     if (!cls) return nil;
-    printf("cls: %p\n", cls);
+    printf("cls: %p name:%s\n", cls, cls->nameForLogging());
     assert(cls->isRealized());
 
     // Read class's info bits all at once for performance
@@ -6165,7 +6176,8 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
         obj = (id)calloc(1, size);
         if (!obj) return nil;
         obj->initInstanceIsa(cls, hasCxxDtor);
-    } 
+        printf("initInstanceIsa cls:%p %s size:%zu \n", cls, cls->nameForLogging(),size);
+    }
     else {
         if (zone) {
             obj = (id)malloc_zone_calloc ((malloc_zone_t *)zone, 1, size);
@@ -6177,6 +6189,7 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
         // Use raw pointer isa on the assumption that they might be 
         // doing something weird with the zone or RR.
         obj->initIsa(cls);
+        printf("initIsa cls:%p %s size:%zu \n", cls, cls->nameForLogging(), size);
     }
 
     printf("obj: %p\n",obj);
@@ -6465,6 +6478,7 @@ classSlotForTagIndex(objc_tag_index_t tag)
 void
 _objc_registerTaggedPointerClass(objc_tag_index_t tag, Class cls)
 {
+    printf("_objc_registerTaggedPointerClass tag: %i class:%s %p\n", tag, cls->nameForLogging(),cls);
     if (objc_debug_taggedpointer_mask == 0) {
         _objc_fatal("tagged pointers are disabled");
     }
@@ -6475,8 +6489,14 @@ _objc_registerTaggedPointerClass(objc_tag_index_t tag, Class cls)
     }
 
     Class oldCls = *slot;
+    if (oldCls) {
+        printf("_objc_registerTaggedPointerClass : old class:%s %p\n", oldCls->nameForLogging(),oldCls);
+    } else {
+        printf("_objc_registerTaggedPointerClass : old class:0x0 \n");
+    }
     
     if (cls  &&  oldCls  &&  cls != oldCls) {
+        printf("_objc_registerTaggedPointerClass : tag");
         _objc_fatal("tag index %u used for two different classes "
                     "(was %p %s, now %p %s)", tag, 
                     oldCls, oldCls->nameForLogging(), 
