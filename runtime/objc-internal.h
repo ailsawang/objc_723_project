@@ -344,7 +344,7 @@ _objc_makeTaggedPointer(objc_tag_index_t tag, uintptr_t value)
 
     printf("_objc_makeTaggedPointer tag: %i value:%u \n",tag, value);
     // assert(_objc_taggedPointersEnabled());
-    if (tag <= OBJC_TAG_Last60BitPayload) {
+    if (tag <= OBJC_TAG_Last60BitPayload) { //payload为60位
         // assert(((value << _OBJC_TAG_PAYLOAD_RSHIFT) >> _OBJC_TAG_PAYLOAD_LSHIFT) == value);
         return (void *)
             (_OBJC_TAG_MASK | 
@@ -354,7 +354,7 @@ _objc_makeTaggedPointer(objc_tag_index_t tag, uintptr_t value)
         // assert(tag >= OBJC_TAG_First52BitPayload);
         // assert(tag <= OBJC_TAG_Last52BitPayload);
         // assert(((value << _OBJC_TAG_EXT_PAYLOAD_RSHIFT) >> _OBJC_TAG_EXT_PAYLOAD_LSHIFT) == value);
-        return (void *)
+        return (void *)                   //payload为52位
             (_OBJC_TAG_EXT_MASK |
              ((uintptr_t)(tag - OBJC_TAG_First52BitPayload) << _OBJC_TAG_EXT_INDEX_SHIFT) |
              ((value << _OBJC_TAG_EXT_PAYLOAD_RSHIFT) >> _OBJC_TAG_EXT_PAYLOAD_LSHIFT));
