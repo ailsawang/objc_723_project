@@ -10,10 +10,39 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        size_t size = sizeof(id);
-        void *testObj = (calloc(5, size));
-        void *testObj2 = (malloc(size * 5));
-        NSLog(@"Hello, World!");
+        NSObject *firstObject = [[NSObject alloc] init];
+        NSLog(@"first object : %@",firstObject);
+        // 标记指针
+        // NSNumber
+        NSNumber *number0 = [NSNumber numberWithChar:9];
+        NSNumber *number1 = [NSNumber numberWithShort:100];
+        NSNumber *number2 = @(4);
+        NSNumber *number21 = @(-4);
+        NSNumber *number3 = [NSNumber numberWithInteger:0xffffff]; //long 或者 longlong 8bytes
+        NSNumber *number31 = number3;  //复制标记指针
+        NSNumber *number32 = @(0x7fffffffffffff);  //正数max number类标记指针的值
+        NSNumber *number33 = @(0x8fffffffffffff);  //超过就在堆上分配内存，因为还有一个标记位表示正负
+        NSNumber *number4 = [NSNumber numberWithFloat:100000.0];
+        NSNumber *number41 = [NSNumber numberWithFloat:100000.1];
+        NSNumber *number42 = [NSNumber numberWithFloat:-100000.0];
+        NSNumber *number5 = [NSNumber numberWithDouble:9.0];
+        NSNumber *number51 = [NSNumber numberWithDouble:9.1];
+        NSLog(@"number0: %p %@",number0,number0);
+        NSLog(@"number1: %p %@",number1,number1);
+        NSLog(@"number2: %p %@",number2,number2);
+        NSLog(@"number21: %p %@",number21,number21);
+        NSLog(@"number3: %p %@",number3,number3);
+        NSLog(@"number31: %p %@",number31,number31);
+        NSLog(@"number32: %p %@",number32,number32);
+        NSLog(@"number33: %p %@",number33,number33);
+        NSLog(@"number4: %p %@",number4,number4);
+        NSLog(@"number41: %p %@",number41,number41);
+        NSLog(@"number42: %p %@",number42,number42);
+        NSLog(@"number5: %p %@",number5,number5);
+        NSLog(@"number51: %p %@",number51,number51);
+        
+        
+        // NSString
         NSString *string1 = @"abcd";
         NSString *string2 = [NSString stringWithFormat:@"%lu", 5];
         NSString *string3 = @"2141";
@@ -36,31 +65,6 @@ int main(int argc, char * argv[]) {
         NSUInteger length = string1.length;
         NSArray *result = [string1 componentsSeparatedByString:@"c"];
         NSLog(@"string: %@ length: %@ result:%@",string1, @(length), result);
-        NSNumber *number10 = [NSNumber numberWithBool:YES];
-        NSNumber *number11 = [NSNumber numberWithChar:9];
-        NSNumber *number12 = [NSNumber numberWithShort:9];
-        NSNumber *number1 = [NSNumber numberWithInteger:1];
-        NSNumber *number2 = [NSNumber numberWithInteger:2];
-        NSNumber *number3 = [NSNumber numberWithInteger:3];
-        NSNumber *number4 = @(4);
-        NSNumber *num5 = [NSNumber numberWithInteger:0xffff];
-        NSNumber *num6 = @(0xffffffff89);
-        NSNumber *num7 = @(0xfffffff8);
-        NSNumber *num8  = @(0xfffffffffffff);
-        NSNumber *num80 = @(0x7fffffffffffff);
-        NSNumber *num81 = @(0xffffffffffffff);
-        NSNumber *num82 = @(0xff67ff89ff12ff1);
-        NSNumber *num90 = [NSNumber numberWithFloat:9.1];
-        NSNumber *num900 = [NSNumber numberWithDouble:9.0];
-        NSNumber *num91 = [NSNumber numberWithLongLong:0xffffffffffff];
-        NSLog(@"number1: %p",number1);
-        NSLog(@"number2: %p",number2);
-        NSLog(@"number2p: %p",&number2);
-        NSLog(@"number3: %p",number3);
-        NSLog(@"number4: %p",number4);
-        NSLog(@"number5: %p",num5);
-        NSLog(@"number6: %p",num6);
-        NSLog(@"number7: %p",num7);
         NSArray *array = [NSArray array];
         NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:10];
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
