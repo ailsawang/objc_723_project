@@ -141,9 +141,9 @@ enum HaveOld { DontHaveOld = false, DoHaveOld = true };
 enum HaveNew { DontHaveNew = false, DoHaveNew = true };
 
 struct SideTable {
-    spinlock_t slock;
-    RefcountMap refcnts;
-    weak_table_t weak_table;
+    spinlock_t slock;    //CH_NOTE 保证原子操作的自旋锁
+    RefcountMap refcnts; //CH_NOTE 引用计数的 hash 表
+    weak_table_t weak_table; //CH_NOTE weak 引用全局 hash 表
 
     SideTable() {
         memset(&weak_table, 0, sizeof(weak_table));
@@ -1599,8 +1599,8 @@ objc_object::sidetable_release(bool performDealloc)
         // SIDE_TABLE_WEAKLY_REFERENCED may be set. Don't change it.
         do_dealloc = true;
         it->second |= SIDE_TABLE_DEALLOCATING;
-    } else if (! (it->second & SIDE_TABLE_RC_PINNED)) {
-        it->second -= SIDE_TABLE_RC_ONE;
+    } else if (! (it->second & SIDE_TABLE_RC_PINNED)) {  //高位为1
+        it->second -= SIDE_TABLE_RC_ONE;             //it->second - 4 也就是 retainCount - 1
     }
     table.unlock();
     if (do_dealloc  &&  performDealloc) {

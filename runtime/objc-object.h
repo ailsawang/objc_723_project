@@ -590,15 +590,15 @@ objc_object::rootRelease(bool performDealloc, bool handleUnderflow)
     do {
         oldisa = LoadExclusive(&isa.bits);
         newisa = oldisa;
-        if (slowpath(!newisa.nonpointer)) {
+        if (slowpath(!newisa.nonpointer)) {  //当前对象isa指针是地址
             ClearExclusive(&isa.bits);
             if (sideTableLocked) sidetable_unlock();
-            return sidetable_release(performDealloc);
+            return sidetable_release(performDealloc);  //sidetable中的引用计数减1，如果是0个则 SEL_DEALLOC
         }
         // don't check newisa.fast_rr; we already called any RR overrides
         uintptr_t carry;
         newisa.bits = subc(newisa.bits, RC_ONE, 0, &carry);  // extra_rc--
-        if (slowpath(carry)) {
+        if (slowpath(carry)) {                               // isa指针中的 extra_rc--
             // don't ClearExclusive()
             goto underflow;
         }
@@ -612,7 +612,7 @@ objc_object::rootRelease(bool performDealloc, bool handleUnderflow)
     // newisa.extra_rc-- underflowed: borrow from side table or deallocate
 
     // abandon newisa to undo the decrement
-    newisa = oldisa;
+    newisa = oldisa;      // 如果isa指针中的 extra_rc 不能再减了，则直接从sidetable中去减
 
     if (slowpath(newisa.has_sidetable_rc)) {
         if (!handleUnderflow) {
@@ -632,7 +632,7 @@ objc_object::rootRelease(bool performDealloc, bool handleUnderflow)
         }
 
         // Try to remove some retain counts from the side table.        
-        size_t borrowed = sidetable_subExtraRC_nolock(RC_HALF);
+        size_t borrowed = sidetable_subExtraRC_nolock(RC_HALF);  //直接从sidetable中借一半RC_HALF出去
 
         // To avoid races, has_sidetable_rc must remain set 
         // even if the side table count is now zero.
@@ -640,7 +640,7 @@ objc_object::rootRelease(bool performDealloc, bool handleUnderflow)
         if (borrowed > 0) {
             // Side table retain count decreased.
             // Try to add them to the inline count.
-            newisa.extra_rc = borrowed - 1;  // redo the original decrement too
+            newisa.extra_rc = borrowed - 1;  // redo the original decrement too 从sidetable借出的RC_HALF-1
             bool stored = StoreReleaseExclusive(&isa.bits, 
                                                 oldisa.bits, newisa.bits);
             if (!stored) {
@@ -680,7 +680,7 @@ objc_object::rootRelease(bool performDealloc, bool handleUnderflow)
         }
     }
 
-    // Really deallocate.
+    // Really deallocate.     如果 sidetable中也是空的，则进入dealloc，把内存回收
 
     if (slowpath(newisa.deallocating)) {
         ClearExclusive(&isa.bits);
